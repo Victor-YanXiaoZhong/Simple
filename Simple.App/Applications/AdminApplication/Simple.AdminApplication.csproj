@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Simple.Framework\Simple.EntityFrameworkCore\Simple.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\Simple.Framework\Simple.Job\Simple.Job.csproj" />
+    <ProjectReference Include="..\..\Contracts\Simple.Contracts.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\AppShared\AppShared.projitems" Label="Shared" />
+</Project>

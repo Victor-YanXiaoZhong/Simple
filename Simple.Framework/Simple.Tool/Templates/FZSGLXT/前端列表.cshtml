@@ -1,0 +1,320 @@
+@using Simple.Generator.Models;
+@using Simple.Dapper;
+@{
+  var config = Model.Config as Config;
+  var table = Model.Table as DbTable;
+  var columns = table.Columns as List<DbColumn>;
+}
+
+<style>
+</style>
+
+<div class="mainbox">
+
+  <h2 class="toptit">
+    <span>
+      @table.Description
+      <img src="~/Content/image/leftimg.png" class="leftimg" />
+      <img src="~/Content/image/imgright.png" class="rightimg" />
+    </span>
+  </h2>
+  <div class="divbox02  ch100">
+    <div class="topbox paddingtb30 flex justify-between color-blue">
+      <div class="flex">
+        <span class="fontleft margin-right10 margin-left20">工作面名称</span>
+        <input class="inputbox w180" id="searchKey" name="searchKey" placeholder="输入工作面名称查询" />
+      </div>
+      <input type="hidden" id="BmId" value="@@ViewBag.DepId" />
+      <div class="flex item-center">
+        <div class="flex">
+          <a class="butbox small w100" id="btn_search">查询</a>
+          <a class="butbox small w100 bgblue margin-left20" onclick="location.reload();">重置</a>
+          <a class="butbox small w100 bgblue02 margin-left20" id="btn_new">新建</a>
+          <a id="btn_import" title="导入" class="margin-left20">
+            <img src="~/Content/image/icon04.png" class="img02" />
+          </a>
+          <a id="btn_export" title="导出" class="margin-left20">
+            <img src="~/Content/image/icon05.png" class="img02" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="adminlist_wrapper " role="grid" style="max-width:100%;overflow:hidden;overflow-x:auto;">
+      <table class="tabstyle scrollwid" style="width:100%" id="list_table">
+        <thead>
+          <tr class="head">
+            <th min-width="0.5rem">序号</th>
+            @foreach (DbColumn column in table.Columns)
+            {
+              if (column.Description != "")
+              {
+                <text>
+                  <th min-width="0.5rem">@(column.Description)</th>
+                </text>
+              }
+            }
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+@@section scripts
+{
+<link href="~/Content/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/fixedColumns.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/main.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/v2css.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/kindeditor/themes/default/default.css" rel="stylesheet" />
+<script src="~/Content/js/base.js"></script>
+
+<script>
+  $(function () {
+    //新增按钮控制
+    var add = btnIsHidden("/@table.ClassName/Index", "1");
+    if (add == false) {
+      $("#btn_new").hide();
+    }
+    //导入按钮控制
+    var add = btnIsHidden("/@table.ClassName/Index", "4");
+    if (add == false) {
+      $("#btn_import").hide();
+    }
+    //导出按钮控制
+    var add = btnIsHidden("/@table.ClassName/Index", "9");
+    if (add == false) {
+      $("#btn_export").hide();
+    }
+  })
+
+  $(function () {
+    //初始化
+    page.Init();
+    $("#btn_search").click();
+    $("#btn_export").click(page.ImportExecl);
+  });
+
+  var page = {
+    seachkey: "",//关键字
+    Init: function () {
+      page.InitDataTable();
+      //绑定事件
+      page.EventInit();
+      $("#btn_new").click(page.AddRecord);
+    },
+    //新增
+    AddRecord: function () {
+      location.href = '/@table.ClassName/Create?id=0';
+    },
+    //导出
+    ImportExecl: function () {
+      location.href = '/@table.ClassName/ExportImportModel';
+    },
+    Detail: function (content) {
+      $('#zz_show').show()
+      $('#zz_show #zz_nr_show').text(content)
+    },
+    GetColumns: function (type) {
+      let colums = [
+        {
+          data: 'index', orderable: false, render: function (d, t, f, m) {
+            return m.row + 1 + m.settings._iDisplayStart;
+          }
+        },
+  @foreach (DbColumn column in table.Columns)
+  {
+    if (column.Description != "")
+    {
+      <text>
+              {data: '@column.ClassPropName', orderable: false, render: page.renderShortField },
+      </text>
+    }
+  }
+            ];
+
+      return colums;
+    },
+    //初始化datatable 控件
+    InitDataTable: function () {
+      //初始化table list
+      page.datatable = $('#list_table').DataTable({
+        processing: true,
+        language: localLanguage,//本地化
+        paging: true, //分页
+        pageLength: 10,//页长
+        info: false,
+        lengthChange: false,
+        pagingType: 'full_numbers',
+        aLengthMenu: [10, 20, 50, 100],
+        serverSide: true,
+        searching: false,//启用文本搜索过滤
+        ordering: true, //使用排序, 多列排序要加shift键操作
+        order: [[1, 'desc']], //默认排序
+        deferRender: true, //延迟渲染数据 处理大数据时提高速度
+        ajax: {
+          url: "/@table.ClassName/GetList",
+          type: "POST",
+          data: function (d) {
+            page.IsReportGroup = $("#IsReportGroup").val();
+            //自定义参数
+            d.seachkey = page.seachkey;
+            d.deptId = page.BmId;
+            if (!page.BmId) {
+              d.deptId = $('#BmId').val()
+            }
+            d.IsReportGroup = page.IsReportGroup;
+          },
+          dataSrc: function (res) {
+            if (res.data.length == 0) return []
+            return res.data;
+          }
+        },
+        columns: page.GetColumns(''),
+        columnDefs: [
+          {
+            "targets": [page.GetColumns('').length],
+            "data": "Id",
+            "render": function (data, type, full) {
+
+              var strs = [];
+              var updatetj = btnIsHidden("/@table.ClassName/Index", "46");
+              var update = btnIsHidden("/@table.ClassName/Index", "2");
+              if (update) {
+                strs.push("<a title='编辑' href='/@table.ClassName/Create?id=" + data + "'><img src='/Content/image/edit.png' class='img01 margin-right30' /></a>");
+              }
+              //删除按钮
+              var deletes = btnIsHidden("/@table.ClassName/Index", "3");
+              if (deletes) {
+                strs.push("<a title='删除' href='#' onclick='page.Delete(" + data + ")'  ><img src=\"/Content/image/del.png' class='img01' /></a>");
+              }
+              return strs.join('');
+            }
+          }
+
+        ],
+        initComplete: function (settings, json) {
+          // $('.table-tooltip').css("cursor", "pointer").tooltipster({ side: "left", maxWidth: 400 });
+        },
+        //在每次table被draw完后调用
+        drawCallback: function (settings) {
+          // setTimeout(function () { page.InitCheckBoxes(); }, 500);
+        }
+      });
+    },
+    renderShortField: function (data, type, full) {
+      let reg = /(?!0000)[0-9]{4}-((0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-8])|(0[13-9]|1[0-2])-(29|30)|(0[13578]|1[02])-31)/
+      let reg1 = /(?!0000)[0-9]{4}.((0[1-9]|1[0-2]).(0[1-9]|1[0-9]|2[0-8])|(0[13-9]|1[0-2]).(29|30)|(0[13578]|1[02])-31)/
+
+      let dt = new Date(data)
+      if (dt.toString() !== "Invalid Date" && (reg.test(data) || reg1.test(data))) {
+        return `${dt.getFullYear()}年${dt.getMonth() + 1}月${dt.getDate()}日`
+      }
+      var strs = [];
+      if (data != null) {
+        var ss = data.length > 15 ? data.substring(0, 15) + "..." : data;
+        strs.push("<span title='" + data + "'>" + ss + "</span>");
+      }
+      return strs.join('');
+    },
+    renderZz: function (data, type, full) {
+      var strs = [];
+      if (data != null) {
+        var ss = data.length > 8 ? data.substring(0, 8) + "..." : data;
+        strs.push(`<span title='${data}' onclick='page.Detail("${data}")'>${ss}</span>`);
+      }
+      return strs.join('');
+    },
+    renderDh: function (data, type, full) {
+      var strs = [];
+      if (data != null) {
+        var ss = data.length > 11 ? data.substring(0, 11) + "..." : data;
+        strs.push(`<span title='${data}'>${ss}</span>`);
+      }
+      return strs.join('');
+    },
+    EventInit: function () {
+      $("#btn_search").click(page.SearchByFilter);
+    },
+    //条件过滤
+    SearchByFilter: function () {
+      page.BmId = $("#department").attr("checks");
+      page.fd1 = $("#fd1").val();
+      page.fd2 = $("#fd2").val();
+      page.IsReportGroup = $("#IsReportGroup").val();
+      page.seachkey = $("#searchKey").val();
+      //重新加载
+      page.datatable.draw();
+    },
+    //删除
+    Delete: function (id) {
+      layer.confirm('确定删除该数据吗?', { btn: ['确定', '取消'] }, function () {
+        $.getJSON("/@table.ClassName/Delete", { id: id }, function (res) {
+
+          if (res.success) {
+            layer.msg("操作成功", { icon: 1, time: 2500 });
+            //重新加载
+            setTimeout(function () {
+              page.datatable.draw();
+              layer.closeAll('dialog');
+            }, 2500);
+          }
+          else {
+            layer.msg(res.message, { icon: 5 });
+          }
+        })
+      });
+    }
+  };
+
+  // 上传
+  layui.use('upload', function () {
+    var $ = layui.jquery, upload = layui.upload;
+    //指定允许上传的文件类型
+    upload.render({
+      elem: '#btn_import',
+      url: '/@table.ClassName/ExcelToUpload', //改成您自己的上传接口
+      accept: 'file', //允许上传文件的类型
+      auto: true,//是否自动完成文件上传
+      exts: 'xls|xlsx',//指定文件类型上传
+      method: 'POST',
+      done: function (res) {
+        if (res.success) {
+          $("#btn_search").click();
+          layer.msg(res.message, { icon: 1, time: 2500 });
+        } else {
+          layer.msg(res.message, { icon: 2, time: 2500 });
+        }
+      },
+      error: function () {
+        layer.msg('上传失败', { icon: 2, time: 2500 });
+      }
+    });
+  });
+
+  var localLanguage = {
+    "sProcessing": "正在努力地加载数据中，请稍候……",
+    "sLengthMenu": "显示 _MENU_ 项结果",
+    "sZeroRecords": "没有匹配结果",
+    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+    "sInfoPostFix": "",
+    "sSearch": "搜索:",
+    "sUrl": "",
+    "sEmptyTable": "表中数据为空",
+    "sLoadingRecords": "载入中...",
+    "sInfoThousands": ",",
+    "oPaginate": {
+      "sFirst": "首页",
+      "sPrevious": "上页",
+      "sNext": "下页",
+      "sLast": "末页"
+    },
+    "oAria": {
+      "sSortAscending": ": 以升序排列此列",
+      "sSortDescending": ": 以降序排列此列"
+    }
+  }
+
+</script>
+}

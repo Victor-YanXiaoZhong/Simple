@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <Import Project="..\..\AppShared\AppShared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Simple.Framework\Simple.AspNetCore\Simple.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Contracts\Simple.Contracts.csproj" />
+    <ProjectReference Include="..\AdminApplication\Simple.AdminApplication.csproj" />
+  </ItemGroup>
+
+</Project>

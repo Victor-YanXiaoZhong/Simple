@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎登录</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            height: 98vh;
+            background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+            font-size: 18px;
+            position: relative;
+        }
+
+        #login_box {
+            width: 20%;
+            background-color: #106898;
+            margin: auto;
+            text-align: center;
+            border-radius: 10px;
+            padding: 50px 50px;
+            transform: translate(50%, -20%);
+        }
+
+        h2 {
+            color: white;
+        }
+
+        input {
+            border: 0;
+            width: 60%;
+            color: #fff;
+            background: transparent;
+            border-bottom: 2px solid #fff;
+            padding: 5px 10px;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 60%;
+            border-radius: 10px;
+            border: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            background-image: linear-gradient(to right, #30cfd0, #2b809f);
+            cursor: pointer;
+        }
+
+        input button {
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        input:focus {
+            transform: scale(1.01);
+        }
+
+        /* 设置placeholder的颜色（带浏览器前缀） */
+        input::-webkit-input-placeholder {
+            color: lightgrey;
+        }
+
+        input::-moz-placeholder {
+            color: lightgrey;
+        }
+
+        input:-ms-input-placeholder {
+            color: lightgrey;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login_box">
+        <div style="text-align: left; color: aquamarine;">欢迎登录</div>
+        <h2>Sign</h2>
+        <div>
+            <input id="accountel" type="text" onkeydown="handleKeyDown(event)" placeholder="请输入用户名">
+        </div>
+        <div>
+            <input id="passwordel" type="password" placeholder="请输入密码">
+        </div>
+        <button onclick="login()">登录</button><br>
+    </div>
+</body>
+<script>
+    var accountel = document.getElementById('accountel');
+    var passwordel = document.getElementById('passwordel');
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.code === 500) {
+                alert('登录异常：' + response.message)
+            } else {
+                var response = JSON.parse(xhr.responseText);
+                localStorage.setItem('USER_INFO', JSON.stringify(response.data));
+                alert('登录成功：' + response.message)
+                window.location = '/index.html'
+            }
+            // 处理返回的数据
+            console.log(response);
+        } else if (xhr.readyState === 4 && xhr.status !== 200) {
+            // 处理请求错误
+            console.error('请求错误');
+            alert('请求错误')
+        }
+    };
+    accountel.focus();
+    function login() {
+        if (accountel.value == '' || passwordel.value == '') alert('用户名和密码必填')
+        xhr.open('post', 'api/Auth/Login', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        var data = { account: accountel.value, password: passwordel.value }
+        xhr.send(JSON.stringify(data));
+    }
+
+    function handleKeyDown(event) {
+        if (event.keyCode === 13) {
+            // 执行你的操作
+            passwordel.focus();
+            // 用户按下了回车键
+            event.preventDefault();
+        }
+    }
+</script>
+</html>

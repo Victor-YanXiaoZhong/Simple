@@ -1,0 +1,27 @@
+﻿@using Simple.Generator.Models;
+@using Simple.Dapper;
+@{
+    var config = Model.Config as Config;
+    var table = Model.Table as DbTable;
+    var columns = table.Columns as List<DbColumn>;
+}
+
+using System;
+using System.Text;
+
+namespace @config.NameSpase
+{
+    /// <summary>@(table.Description)</summary>
+    public partial class @table.ClassName
+    {
+        #region 属性
+    @foreach (DbColumn column in table.Columns)
+    {
+        <text>
+        /// <summary>@(column.Description)</summary>
+        public @(column.CodeType) @(column.ClassPropName) { get ; set ;}
+        </text>
+    }
+    #endregion
+    }
+}

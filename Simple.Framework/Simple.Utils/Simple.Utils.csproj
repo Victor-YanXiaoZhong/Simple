@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<LangVersion>preview</LangVersion>
+	<Authors>$(Authors)</Authors>
+	<PackageProjectUrl>$(Git)</PackageProjectUrl>
+  </PropertyGroup>
+	<PropertyGroup>
+		<Authors>yxz(564353357@qq.com)</Authors>
+		<Company>yxz</Company>
+		<Git>https://gitee.com/VCodeWork/simple-framework</Git>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://gitee.com/VCodeWork/simple-framework</RepositoryUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<Title>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Title>
+		<Description>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Description>
+		<PackageOutputPath>..\..\Package</PackageOutputPath>
+		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\Package\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LiteDB" Version="5.0.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.8" />
+    <PackageReference Include="RedLock.net" Version="2.3.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

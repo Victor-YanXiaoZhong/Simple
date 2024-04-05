@@ -1,0 +1,19 @@
+{
+  "ShowEfCoreCommand": true,
+  "ShowSwagger": true,
+  "TokenHeadKey": "Authorization",
+  "Jwt": {
+    "Issuer": "app",
+    "Audience": "app",
+    "SecurityKey": "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3",
+    "ExpMinutes": "30"
+  },
+  "ConnectionStrings": {
+    "AdminDb": "Server=.\\SQLEXPRESS;Initial Catalog=Simpledb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+  },
+  "Redis": {
+    "Hosts": "127.0.0.1:6379",
+    "Pwd": "",
+    "Database": 3
+  }
+}

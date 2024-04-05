@@ -1,0 +1,14 @@
+<Project>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+    <DefineConstants>NET47</DefineConstants>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\net472\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\netstandard2\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+</Project>

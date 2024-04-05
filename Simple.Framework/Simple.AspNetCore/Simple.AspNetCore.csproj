@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <LangVersion>preview</LangVersion>
+	  <Authors>$(Authors)</Authors>
+	  <PackageProjectUrl>$(Git)</PackageProjectUrl>
+  </PropertyGroup>
+	<PropertyGroup>
+		<Authors>yxz(564353357@qq.com)</Authors>
+		<Company>yxz</Company>
+		<Git>https://gitee.com/VCodeWork/simple-framework</Git>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://gitee.com/VCodeWork/simple-framework</RepositoryUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<Title>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Title>
+		<Description>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Description>
+		<PackageOutputPath>..\..\Package</PackageOutputPath>
+		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\Package\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Simple.EntityFrameworkCore\Simple.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Simple.Utils\Simple.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

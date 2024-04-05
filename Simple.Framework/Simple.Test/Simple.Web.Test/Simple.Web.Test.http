@@ -1,0 +1,26 @@
+@Simple.Web.Test_HostAddress = http://localhost:9999
+
+GET {{Simple.Web.Test_HostAddress}}/weatherforecast/
+Accept: application/json
+
+{
+    "date": "2023-05-10",
+    "temperatureC": 30,
+    "summary": "Warm"
+}
+###
+
+GET {{Simple.Web.Test_HostAddress}}/wxmp/token?echostr=jah
+Accept: application/json
+
+###
+
+GET {{Simple.Web.Test_HostAddress}}/wxmp/getaccesstoken
+Accept: application/json
+
+###
+
+GET {{Simple.Web.Test_HostAddress}}/wxmp/GetJSSDKParam?url={{Simple.Web.Test_HostAddress}}/wxmp/GetJSSDKParam
+Accept: application/json
+
+###

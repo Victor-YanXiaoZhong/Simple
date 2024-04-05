@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2;net472;net462</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<LangVersion>preview</LangVersion>
+  </PropertyGroup>
+	<Import Project="..\build\package.props" />
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Simple.Utils\Simple.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
