@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -42,19 +43,24 @@ namespace Simple.JobManageConsole.Help
             }
         }
 
-        public static void Waring(string nessage, string subPath = "", string logType = "Waring")
+        public static void Waring(string message, string subPath = "", string logType = "Waring")
         {
-            Log(new LogItem { Message = nessage, SubPath = subPath, LogType = logType });
+            Log(new LogItem { Message = message, SubPath = subPath, LogType = logType });
         }
 
-        public static void Info(string nessage, string subPath = "", string logType = "Info")
+        public static void Info(string message, string subPath = "", string logType = "Info")
         {
-            Log(new LogItem { Message = nessage, SubPath = subPath, LogType = logType });
+            Log(new LogItem { Message = message, SubPath = subPath, LogType = logType });
         }
 
-        public static void Err(string nessage, string subPath = "", string logType = "Err")
+        public static void Err(string message, string subPath = "", string logType = "Err")
         {
-            Log(new LogItem { Message = nessage, SubPath = subPath, LogType = logType });
+            Log(new LogItem { Message = message, SubPath = subPath, LogType = logType });
+        }
+
+        public static void Err(Exception ex, string message = "", string logType = "Err")
+        {
+            Log(new LogItem { Message = message + JsonConvert.SerializeObject(ex), SubPath = "Err", LogType = logType });
         }
 
         public static void Log(LogItem item)

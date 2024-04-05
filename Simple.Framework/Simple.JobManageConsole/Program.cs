@@ -1,3 +1,4 @@
+using Simple.JobManageConsole.Help;
 using Simple.WinUI.Forms;
 using Simple.WinUI.Helper;
 
@@ -29,6 +30,7 @@ namespace Simple.JobManageConsole
         private static void ExceptionLog(Exception ex, string text = "出现未处理的异常")
         {
             UIHelper.AlertError(ex, text);
+            LogHelper.Err(ex);
         }
 
         public static void Run(string name = "调度控制台", Icon logo = null)
