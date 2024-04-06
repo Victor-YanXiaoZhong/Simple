@@ -45,6 +45,11 @@ namespace Simple.WinUI.Forms
             };
 
             FormClosing += SysTrayAppConsole_FormClosing;
+
+            if (appOption.SetApplicationToStartup)
+            {
+                WinProcessHelper.SetApplicationToStartup(appOption.SetApplicationToStartup);
+            }
         }
 
         private void SysTrayAppConsole_FormClosing(object? sender, FormClosingEventArgs e)
@@ -95,6 +100,9 @@ namespace Simple.WinUI.Forms
 
         /// <summary>是否能关闭</summary>
         public bool CanClose { get; set; } = true;
+
+        /// <summary>程序开机启动</summary>
+        public bool SetApplicationToStartup { get; set; } = true;
 
         /// <summary>显示时打开的页面</summary>
         public Form MainPage { get; set; }

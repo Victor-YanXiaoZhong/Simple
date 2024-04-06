@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -89,6 +90,30 @@ namespace Simple.WinUI
                 process.Close();
             }
             return result;
+        }
+
+        /// <summary>设置当前程序开机启动</summary>
+        /// <param name="enable"></param>
+        public static void SetApplicationToStartup(bool enable)
+        {
+            string appName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+            string appPath = Application.ExecutablePath;
+
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (enable)
+            {
+                var existingValue = rk.GetValue(appName);
+                if (existingValue == null || existingValue.ToString() != appPath)
+                {
+                    // 设置值，以便对应的应用程序在登录时启动
+                    rk.SetValue(appName, $"\"{appPath}\""); // 添加引号以确保路径中的空格不会导致问题
+                }
+            }
+            else
+            {
+                rk.DeleteValue(appName, false);
+            }
         }
     }
 }
