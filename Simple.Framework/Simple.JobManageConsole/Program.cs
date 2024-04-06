@@ -33,6 +33,9 @@ namespace Simple.JobManageConsole
             LogHelper.Err(ex);
         }
 
+        /// <summary>job需要实现 IJobSchedule接口</summary>
+        /// <param name="name"></param>
+        /// <param name="logo"></param>
         public static void Run(string name = "调度控制台", Icon logo = null)
         {
             // 添加全局异常处理
