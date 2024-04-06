@@ -57,9 +57,15 @@ namespace Simple.JobManageConsole
 
         private void GetJobs()
         {
-            Schedules = JobManager.AllSchedules.OrderBy(x => x.Name).ToList();
-            BindingList<Schedule> schedules = new BindingList<Schedule>(Schedules);
-            scheduleVOBindingSource.DataSource = schedules;
+            try
+            {
+                Schedules = JobManager.AllSchedules.OrderBy(x => x.Name).ToList();
+                BindingList<Schedule> schedules = new BindingList<Schedule>(Schedules);
+                scheduleVOBindingSource.DataSource = schedules;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void btnRunNow_Click(object sender, EventArgs e)

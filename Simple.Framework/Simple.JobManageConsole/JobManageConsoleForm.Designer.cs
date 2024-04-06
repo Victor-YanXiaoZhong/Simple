@@ -29,14 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JobManageConsoleForm));
             uSplitContainer1 = new WinUI.Controls.SplitContainer.USplitContainer();
-            gdvSchedule = new WinUI.Controls.DataGridView.DataGridViewWithFilter();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            NextRun = new DataGridViewTextBoxColumn();
-            disabledDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             scheduleVOBindingSource = new BindingSource(components);
             uPanel1 = new WinUI.Controls.Panel.UPanel();
             btnEnable = new WinUI.Controls.Button.UButton();
@@ -44,13 +39,17 @@
             btnRunNow = new WinUI.Controls.Button.UButton();
             btnRefresh = new WinUI.Controls.Button.UButton();
             txt_JobMessage = new WinUI.Controls.TextBox.UTextBox();
+            gdvSchedule = new DataGridView();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            disabledDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)uSplitContainer1).BeginInit();
             uSplitContainer1.Panel1.SuspendLayout();
             uSplitContainer1.Panel2.SuspendLayout();
             uSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gdvSchedule).BeginInit();
             ((System.ComponentModel.ISupportInitialize)scheduleVOBindingSource).BeginInit();
             uPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gdvSchedule).BeginInit();
             SuspendLayout();
             // 
             // uSplitContainer1
@@ -77,68 +76,6 @@
             uSplitContainer1.SplitterDistance = 261;
             uSplitContainer1.SplitterWidth = 10;
             uSplitContainer1.TabIndex = 0;
-            // 
-            // gdvSchedule
-            // 
-            gdvSchedule.AllowUserToAddRows = false;
-            gdvSchedule.AllowUserToDeleteRows = false;
-            gdvSchedule.AllowUserToOrderColumns = true;
-            gdvSchedule.AutoGenerateColumns = false;
-            gdvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            gdvSchedule.BackgroundColor = SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            gdvSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            gdvSchedule.ColumnHeadersHeight = 30;
-            gdvSchedule.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            gdvSchedule.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, NextRun, disabledDataGridViewCheckBoxColumn });
-            gdvSchedule.DataSource = scheduleVOBindingSource;
-            gdvSchedule.Dock = DockStyle.Fill;
-            gdvSchedule.Location = new Point(0, 47);
-            gdvSchedule.MultiSelect = false;
-            gdvSchedule.Name = "gdvSchedule";
-            gdvSchedule.ReadOnly = true;
-            gdvSchedule.RowHeadersVisible = false;
-            gdvSchedule.RowHeadersWidth = 51;
-            gdvSchedule.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            gdvSchedule.RowTemplate.ReadOnly = true;
-            gdvSchedule.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            gdvSchedule.ShowFilter = false;
-            gdvSchedule.ShowRowErrors = false;
-            gdvSchedule.Size = new Size(800, 214);
-            gdvSchedule.TabIndex = 1;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.FillWeight = 50F;
-            nameDataGridViewTextBoxColumn.HeaderText = "调度名称";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // NextRun
-            // 
-            NextRun.DataPropertyName = "NextRun";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
-            dataGridViewCellStyle2.NullValue = "“”";
-            NextRun.DefaultCellStyle = dataGridViewCellStyle2;
-            NextRun.FillWeight = 30F;
-            NextRun.HeaderText = "下次运行时间";
-            NextRun.Name = "NextRun";
-            NextRun.ReadOnly = true;
-            // 
-            // disabledDataGridViewCheckBoxColumn
-            // 
-            disabledDataGridViewCheckBoxColumn.DataPropertyName = "Disabled";
-            disabledDataGridViewCheckBoxColumn.FillWeight = 20F;
-            disabledDataGridViewCheckBoxColumn.HeaderText = "是否禁用";
-            disabledDataGridViewCheckBoxColumn.Name = "disabledDataGridViewCheckBoxColumn";
-            disabledDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // scheduleVOBindingSource
             // 
@@ -238,7 +175,6 @@
             // txt_JobMessage
             // 
             txt_JobMessage.BorderColor = Color.FromArgb(0, 0, 0);
-            txt_JobMessage.BorderStyle = BorderStyle.None;
             txt_JobMessage.BorderWidth = 1;
             txt_JobMessage.Dock = DockStyle.Fill;
             txt_JobMessage.HotColor = Color.FromArgb(0, 0, 0);
@@ -251,6 +187,53 @@
             txt_JobMessage.ScrollBars = ScrollBars.Vertical;
             txt_JobMessage.Size = new Size(800, 179);
             txt_JobMessage.TabIndex = 0;
+            // 
+            // gdvSchedule
+            // 
+            gdvSchedule.AllowUserToAddRows = false;
+            gdvSchedule.AllowUserToDeleteRows = false;
+            gdvSchedule.AutoGenerateColumns = false;
+            gdvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gdvSchedule.BackgroundColor = SystemColors.ButtonFace;
+            gdvSchedule.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gdvSchedule.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, dataGridViewTextBoxColumn1, disabledDataGridViewCheckBoxColumn });
+            gdvSchedule.DataSource = scheduleVOBindingSource;
+            gdvSchedule.Dock = DockStyle.Fill;
+            gdvSchedule.Location = new Point(0, 47);
+            gdvSchedule.MultiSelect = false;
+            gdvSchedule.Name = "gdvSchedule";
+            gdvSchedule.ReadOnly = true;
+            gdvSchedule.RowHeadersVisible = false;
+            gdvSchedule.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gdvSchedule.Size = new Size(800, 214);
+            gdvSchedule.TabIndex = 1;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.FillWeight = 50F;
+            nameDataGridViewTextBoxColumn.HeaderText = "调度名称";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "NextRun";
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss";
+            dataGridViewCellStyle2.NullValue = "\"\"";
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewTextBoxColumn1.FillWeight = 30F;
+            dataGridViewTextBoxColumn1.HeaderText = "下次运行时间";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // disabledDataGridViewCheckBoxColumn
+            // 
+            disabledDataGridViewCheckBoxColumn.DataPropertyName = "Disabled";
+            disabledDataGridViewCheckBoxColumn.FillWeight = 20F;
+            disabledDataGridViewCheckBoxColumn.HeaderText = "是否禁用";
+            disabledDataGridViewCheckBoxColumn.Name = "disabledDataGridViewCheckBoxColumn";
+            disabledDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // JobManageConsoleForm
             // 
@@ -267,9 +250,9 @@
             uSplitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)uSplitContainer1).EndInit();
             uSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gdvSchedule).EndInit();
             ((System.ComponentModel.ISupportInitialize)scheduleVOBindingSource).EndInit();
             uPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gdvSchedule).EndInit();
             ResumeLayout(false);
         }
 
@@ -278,15 +261,15 @@
         private WinUI.Controls.SplitContainer.USplitContainer uSplitContainer1;
         private WinUI.Controls.Panel.UPanel uPanel1;
         private WinUI.Controls.TextBox.UTextBox txt_JobMessage;
-        private WinUI.Controls.DataGridView.DataGridViewWithFilter gdvSchedule;
         private WinUI.Controls.Button.UButton btnDisabled;
         private WinUI.Controls.Button.UButton btnRunNow;
         private WinUI.Controls.Button.UButton btnRefresh;
         private BindingSource scheduleVOBindingSource;
         private DataGridViewTextBoxColumn nextRunDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn NextRun;
-        private DataGridViewCheckBoxColumn disabledDataGridViewCheckBoxColumn;
         private WinUI.Controls.Button.UButton btnEnable;
+        private DataGridView gdvSchedule;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewCheckBoxColumn disabledDataGridViewCheckBoxColumn;
     }
 }
