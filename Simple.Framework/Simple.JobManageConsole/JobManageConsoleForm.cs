@@ -91,6 +91,7 @@ namespace Simple.JobManageConsole
             if (this.Confirm($"确定要停止执行调度【{currentSchedule.Name}】吗？"))
             {
                 currentSchedule.Disable();
+                GetJobs();
             }
         }
 
@@ -104,6 +105,7 @@ namespace Simple.JobManageConsole
             if (this.Confirm($"确定要启用调度【{currentSchedule.Name}】吗？"))
             {
                 currentSchedule.Enable();
+                GetJobs();
             }
         }
 

@@ -21,49 +21,4 @@ namespace Simple.JobManageConsole.Jobs
             schedule.ToRunEvery(10).Seconds();
         }
     }
-
-    public class DefaultJob1 : IJobSchedule
-    {
-        public string JobName { get; set; } = "DefaultJob1";
-
-        public void Execute()
-        {
-            Thread.Sleep(15000);
-        }
-
-        public void ScheduleConfig(Schedule schedule)
-        {
-            schedule.ToRunEvery(11).Seconds();
-        }
-    }
-
-    public class DefaultJob2 : IJobSchedule
-    {
-        public string JobName { get; set; } = "DefaultJob2";
-
-        public void Execute()
-        {
-            Thread.Sleep(13000);
-        }
-
-        public void ScheduleConfig(Schedule schedule)
-        {
-            schedule.ToRunEvery(12).Seconds();
-        }
-    }
-
-    public class DefaultJob3 : IJobSchedule
-    {
-        public string JobName { get; set; } = "DefaultJob3";
-
-        public void Execute()
-        {
-            Thread.Sleep(16000);
-        }
-
-        public void ScheduleConfig(Schedule schedule)
-        {
-            schedule.ToRunEvery(13).Seconds();
-        }
-    }
 }
