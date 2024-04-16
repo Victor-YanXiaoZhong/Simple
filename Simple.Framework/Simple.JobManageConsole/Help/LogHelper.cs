@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Simple.JobManageConsole.Help
 {
-    internal class LogHelper
+    public class LogHelper
     {
         private static readonly ConcurrentQueue<LogItem> logQueue = new ConcurrentQueue<LogItem>();
         private static bool isRunning = false;

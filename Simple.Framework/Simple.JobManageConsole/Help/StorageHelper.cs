@@ -14,7 +14,7 @@ namespace Simple.JobManageConsole.Help
             this.FileName = fileName;
             if (!File.Exists(dbFile))
             {
-                File.Create(dbFile);
+                File.Create(dbFile, 1024, FileOptions.Asynchronous);
             }
             GetList();
         }

@@ -10,11 +10,11 @@ namespace Simple.JobManageConsole
         [STAThread]
         private static void Main()
         {
-            JobManageConsole.Run();
+            JobHelper.Run();
         }
     }
 
-    public static class JobManageConsole
+    public static class JobHelper
     {
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
