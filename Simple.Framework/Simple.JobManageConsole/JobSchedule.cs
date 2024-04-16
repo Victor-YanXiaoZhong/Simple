@@ -10,7 +10,7 @@ namespace Simple.JobManageConsole
         {
             if (registrys.Length == 0)
             {
-                registrys = [new JobRegistry()];
+                registrys = new Registry[1] { new JobRegistry() };
             }
             JobManager.Initialize(registrys);
             JobManager.JobEnd += JobManager_JobEnd;

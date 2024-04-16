@@ -40,8 +40,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 386);
-            ControlBox = false;
+            ClientSize = new Size(534, 384);
             IsMdiContainer = true;
             MaximizeBox = false;
             Name = "SysTrayAppConsole";

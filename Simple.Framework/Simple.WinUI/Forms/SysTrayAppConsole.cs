@@ -10,23 +10,22 @@ namespace Simple.WinUI.Forms
         private Form mainPage;
         private SysTrayAppOption appOption;
 
+        private bool trulyExiting = false;
+
         public SysTrayAppConsole(SysTrayAppOption appOption)
         {
             this.appOption = appOption;
             InitializeComponent();
             // 创建托盘菜单。
             trayMenu = new ContextMenuStrip();
-            trayMenu.Items.Add("显示", Properties.Resources.display, (s, e) => WindowState = FormWindowState.Normal);
-            if (appOption.CanClose)
-            {
-                trayMenu.Items.Add("退出", Properties.Resources.power, OnExit);
-            }
+            trayMenu.Items.Add("显示", Properties.Resources.display, showForm);
+            trayMenu.Items.Add("退出", Properties.Resources.power, OnExit);
 
             // 创建托盘图标。
             trayIcon = new NotifyIcon();
             trayIcon.Text = appOption.AppTitle;
             trayIcon.Icon = appOption.AppIcon;
-            trayIcon.DoubleClick += (s, e) => WindowState = FormWindowState.Normal;
+            trayIcon.DoubleClick += showForm;
 
             trayIcon.ContextMenuStrip = trayMenu;
             trayIcon.Visible = true;
@@ -52,19 +51,19 @@ namespace Simple.WinUI.Forms
             }
         }
 
+        private void showForm(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            Show();
+        }
+
         private void SysTrayAppConsole_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            if (!appOption.CanClose)
+            if (!trulyExiting)
             {
                 e.Cancel = true;
-                WindowState = FormWindowState.Minimized;
-            }
-            else
-            {
-                if (!this.Confirm("确认退出程序吗？"))
-                {
-                    e.Cancel = true;
-                }
+                WindowState = FormWindowState.Normal;
+                Hide();
             }
         }
 
@@ -72,6 +71,7 @@ namespace Simple.WinUI.Forms
         {
             if (this.Confirm("确认退出程序吗？"))
             {
+                trulyExiting = true;
                 Application.Exit();
             }
         }
@@ -97,9 +97,6 @@ namespace Simple.WinUI.Forms
 
         /// <summary>图标</summary>
         public Icon AppIcon { get; set; } = new Icon(SystemIcons.Application, 40, 40);
-
-        /// <summary>是否能关闭</summary>
-        public bool CanClose { get; set; } = true;
 
         /// <summary>程序开机启动</summary>
         public bool SetApplicationToStartup { get; set; } = true;
