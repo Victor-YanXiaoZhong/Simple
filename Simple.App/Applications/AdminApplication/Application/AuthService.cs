@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Simple.AdminApplication.Entitys;
 using Simple.AdminApplication.Model;
 using Simple.AspNetCore.Helper;
+using Simple.RedisClient;
 using Simple.Utils.Models.BO;
 
 namespace Simple.AdminApplication.Application

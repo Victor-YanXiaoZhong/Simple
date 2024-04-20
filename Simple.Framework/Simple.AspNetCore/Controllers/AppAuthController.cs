@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Simple.AspNetCore.Helper;
+using Simple.RedisClient;
 using Simple.Utils;
 using Simple.Utils.Helper;
 using Simple.Utils.Models.BO;

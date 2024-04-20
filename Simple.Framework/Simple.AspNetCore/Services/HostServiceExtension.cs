@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Simple.AspNetCore.Filters;
+using Simple.RedisClient;
 using Simple.Utils;
 
 using Simple.Utils.Attributes;

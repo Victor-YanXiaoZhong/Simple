@@ -1,6 +1,7 @@
 ﻿using FluentScheduler;
 using Simple.AdminApplication.Entitys;
 using Simple.Job;
+using Simple.RedisClient;
 using Simple.Utils.Models.BO;
 
 namespace Simple.AdminApplication.Jobs
