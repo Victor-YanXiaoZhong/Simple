@@ -1,4 +1,9 @@
-<Project>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>preview</LangVersion>
+  </PropertyGroup>
 	<PropertyGroup>
 		<Authors>yxz(564353357@qq.com)</Authors>
 		<Company>yxz</Company>
@@ -7,10 +12,10 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://gitee.com/VCodeWork/simple-framework</RepositoryUrl>
 		<PackageIcon>logo.png</PackageIcon>
-		<Title>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Title>
-		<Description>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Description>
+		<Title>Simple框架基础库，主要包含redis帮助类，用于方便开发的</Title>
+		<Description>Simple框架基础库，主要包含redis帮助类，用于方便开发的</Description>
 		<PackageOutputPath>..\..\Package</PackageOutputPath>
-		<VersionPrefix>1.0.2</VersionPrefix>
+		<VersionPrefix>1.0.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 	</PropertyGroup>
 	<ItemGroup>
@@ -23,4 +28,10 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="RedLock.net" Version="2.3.2" />
+    <PackageReference Include="Simple.Utils" Version="1.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+  </ItemGroup>
+
 </Project>

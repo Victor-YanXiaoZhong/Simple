@@ -1,9 +1,15 @@
 ﻿using Newtonsoft.Json;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
+using Simple.Utils;
+using Simple.Utils.Helper;
 using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Simple.Utils.Helper
+namespace Simple.RedisClient
 {
     public class RedisHelper
     {
