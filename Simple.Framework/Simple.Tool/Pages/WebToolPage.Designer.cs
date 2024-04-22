@@ -35,6 +35,7 @@
             iconhuntToolStripMenuItem = new ToolStripMenuItem();
             feathericonsToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripMenuItem();
+            正则解析 = new ToolStripMenuItem();
             测试2ToolStripMenuItem = new ToolStripMenuItem();
             生成文件ToolStripMenuItem = new ToolStripMenuItem();
             测试11ToolStripMenuItem = new ToolStripMenuItem();
@@ -62,7 +63,7 @@
             // 
             // 收藏ToolStripMenuItem
             // 
-            收藏ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 字节IconpartToolStripMenuItem, streamlineToolStripMenuItem, iconhuntToolStripMenuItem, feathericonsToolStripMenuItem, toolStripMenuItem1 });
+            收藏ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 字节IconpartToolStripMenuItem, streamlineToolStripMenuItem, iconhuntToolStripMenuItem, feathericonsToolStripMenuItem, toolStripMenuItem1, 正则解析 });
             收藏ToolStripMenuItem.Name = "收藏ToolStripMenuItem";
             收藏ToolStripMenuItem.Size = new Size(44, 21);
             收藏ToolStripMenuItem.Text = "收藏";
@@ -102,6 +103,14 @@
             toolStripMenuItem1.Size = new Size(149, 22);
             toolStripMenuItem1.Tag = "https://www.canva.com/";
             toolStripMenuItem1.Text = "在线设计";
+            // 
+            // 正则解析
+            // 
+            正则解析.Name = "正则解析";
+            正则解析.Size = new Size(149, 22);
+            正则解析.Tag = "https://regex-vis.com/";
+            正则解析.Text = "正则解析";
+            正则解析.TextDirection = ToolStripTextDirection.Horizontal;
             // 
             // 测试2ToolStripMenuItem
             // 
@@ -199,5 +208,6 @@
         private ToolStripMenuItem feathericonsToolStripMenuItem;
         private WinUI.Controls.Button.UButton btnBack;
         private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem 正则解析;
     }
 }
