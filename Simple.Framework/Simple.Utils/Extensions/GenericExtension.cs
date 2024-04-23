@@ -73,6 +73,27 @@ namespace Simple.Utils
             return defaultValue;
         }
 
+        /// <summary>将字符串转换为指定的类型，如果转换不成功，返回默认值。</summary>
+        /// <typeparam name="T">任何可能得类型</typeparam>
+        /// <param name="str">需要转换的字符串</param>
+        /// <param name="defaultValue">如果转换失败，需要使用的默认值</param>
+        /// <returns>返回指定的类型。</returns>
+        public static T? ParseToAny<T>(this string str, T defaultValue = default)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return defaultValue;
+            }
+            try
+            {
+                return (T)Convert.ChangeType(str, typeof(T));
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
         /// <summary>将字符串转换为指定的类型，如果转换不成功，返回null</summary>
         /// <typeparam name="T">结构体类型或枚举类型</typeparam>
         /// <param name="str">需要转换的字符串</param>

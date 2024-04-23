@@ -7,7 +7,7 @@ namespace Simple.Utils
     /// <summary>DataReader扩展类</summary>
     public static class DataReaderExtension
     {
-        public static List<TResult> ToList<TResult>(this IDataReader dr, bool isClose) where TResult : class, new()
+        public static List<TResult> ToList<TResult>(this IDataReader dr) where TResult : class, new()
         {
             try
             {
@@ -15,18 +15,36 @@ namespace Simple.Utils
                 List<TResult> list = new List<TResult>();
                 if (dr == null) return list;
                 while (dr.Read()) list.Add(eblist.Build(dr));
-                if (isClose) { dr.Close(); dr.Dispose(); dr = null; }
                 return list;
             }
             catch (Exception ex)
             {
                 throw new FatalException($"dr 转换 {typeof(TResult)} 异常", ex);
             }
+            finally
+            {
+                dr.Close(); dr.Dispose(); //释放资源
+            }
         }
 
-        public static List<TResult> ToList<TResult>(this IDataReader dr) where TResult : class, new()
+        public static TResult ToEntity<TResult>(this IDataReader dr) where TResult : class, new()
         {
-            return dr.ToList<TResult>(true);
+            if (dr == null || !dr.Read()) return null;
+
+            try
+            {
+                IDataReaderEntityBuilder<TResult> eb = IDataReaderEntityBuilder<TResult>.CreateBuilder(dr);
+                TResult entity = eb.Build(dr);
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new FatalException($"dr 转换 {typeof(TResult)} 异常", ex);
+            }
+            finally
+            {
+                dr.Close(); dr.Dispose();
+            }
         }
 
         public class IDataReaderEntityBuilder<Entity>
@@ -67,7 +85,19 @@ namespace Simple.Utils
                         generator.Emit(OpCodes.Ldarg_0);
                         generator.Emit(OpCodes.Ldc_I4, i);
                         generator.Emit(OpCodes.Callvirt, getValueMethod);
-                        generator.Emit(OpCodes.Unbox_Any, dataRecord.GetFieldType(i));
+
+                        Type propertyType = propertyInfo.PropertyType;
+                        Type nullableType = Nullable.GetUnderlyingType(propertyType);
+                        if (nullableType != null)
+                        {
+                            generator.Emit(OpCodes.Unbox_Any, nullableType);
+                            generator.Emit(OpCodes.Newobj, propertyType.GetConstructor(new[] { nullableType }));
+                        }
+                        else
+                        {
+                            generator.Emit(OpCodes.Unbox_Any, dataRecord.GetFieldType(i));
+                        }
+
                         generator.Emit(OpCodes.Callvirt, propertyInfo.GetSetMethod());
                         generator.MarkLabel(endIfLabel);
                     }
