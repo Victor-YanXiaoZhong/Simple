@@ -50,6 +50,13 @@ namespace Simple.Utils.Helper
             }, commandText, CreateParameters(parameters), commandType, false, timeOut);
         }
 
+        /// <summary>执行查询语句，返回单个结果 如果有多个结果，默认返回第一个，没有结果返回null</summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="commandText"></param>
+        /// <param name="commandType"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeOut"></param>
+        /// <returns></returns>
         public T Get<T>(string commandText, CommandType commandType = CommandType.Text,
             object? parameters = null, int? timeOut = null) where T : class, new()
         {
