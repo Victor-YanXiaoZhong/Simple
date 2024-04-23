@@ -41,11 +41,11 @@ namespace Simple.Data.Test
             Assert.That(r3.Rows.Count > 1);
             var r41 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_User");
             var r4 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_Role");
-            var r5 = sqlHelper.Get<SysRole>("SELECT * FROM Sys_Role");
+            var r5 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM Sys_Role");
 
             var r6 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_Role where Id>@id",
                 parameters: new { id = 1 });
-            var r7 = sqlHelper.Get<SysRole>("SELECT * FROM Sys_Role where Id=@id",
+            var r7 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM Sys_Role where Id=@id",
                  parameters: new { id = 1 });
         }
     }
