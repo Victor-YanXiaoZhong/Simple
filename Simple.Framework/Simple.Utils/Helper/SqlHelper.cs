@@ -57,7 +57,7 @@ namespace Simple.Utils.Helper
         /// <param name="parameters"></param>
         /// <param name="timeOut"></param>
         /// <returns></returns>
-        public T Get<T>(string commandText, CommandType commandType = CommandType.Text,
+        public T FirstOrDefault<T>(string commandText, CommandType commandType = CommandType.Text,
             object? parameters = null, int? timeOut = null) where T : class, new()
         {
             return Execute(command =>
