@@ -36,7 +36,7 @@ namespace Simple.Dapper.Test
             var dbbuilder = new DbContextOptionsBuilder
             {
             };
-            TestEfDb = new TestDbcontext(ConfigHelper.GetConnectionString("AdminDb"));
+            TestEfDb = new TestDbcontext(ConfigHelper.GetValue("AdminDb:ConnectionString"));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Simple.Dapper.Test
             //var mysqlconnected = MysqlDb.TestConection();
             Assert.That(sqlLiteconnected);
             Assert.That(mssqlconnected);
-            TcpLogClient.SendLog("×é¼þ³õÊ¼»¯³É¹¦");
+            TcpLogClient.SendLog("ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½É¹ï¿½");
 
             Thread.Sleep(5000);
         }

@@ -129,7 +129,7 @@ namespace Simple.Utils.Helper
         public static event Action<string, string> SqlPrint;
 
         /// <summary>获取新数据库连接，连接成功后打开连接</summary>
-        private DbConnection NewConnection
+        public DbConnection NewConnection
         {
             get
             {
@@ -272,7 +272,8 @@ namespace Simple.Utils.Helper
                             catch (DbException ex)
                             {
                                 transaction.Rollback();
-                                throw new FatalException($"数据库事务处理异常", "操作数据库异常", ex);
+                                var sqlDebug = $"执行的Sql：{commandText}，参数：{sqlPrint}";
+                                throw new FatalException($"数据库事务处理异常" + sqlDebug, "操作数据库异常", ex);
                             }
                         }
                     }
@@ -284,7 +285,8 @@ namespace Simple.Utils.Helper
                         }
                         catch (DbException ex)
                         {
-                            throw new FatalException($"数据库命令处理异常", "操作数据库异常", ex);
+                            var sqlDebug = $"执行的Sql：{commandText}，参数：{sqlPrint}";
+                            throw new FatalException($"数据库命令处理异常" + sqlDebug, "操作数据库异常", ex);
                         }
                     }
                 }

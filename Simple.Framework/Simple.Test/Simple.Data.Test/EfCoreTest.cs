@@ -12,6 +12,7 @@ namespace Simple.Dapper.Test
         public void Connect()
         {
             Assert.That(TestEfDb.Database.CanConnect());
+            TestEfDb.Database.EnsureCreated();
         }
 
         [Test]

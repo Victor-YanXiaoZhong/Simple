@@ -37,15 +37,15 @@ namespace Simple.Data.Test
         {
             var r1 = sqlHelper.TestConection();
             var r2 = sqlHelper.ServerVersion();
-            var r3 = sqlHelper.ExecuteDataTable("SELECT * FROM Sys_User");
-            Assert.That(r3.Rows.Count > 1);
-            var r41 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_User");
-            var r4 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_Role");
-            var r5 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM Sys_Role");
+            var r3 = sqlHelper.ExecuteDataTable("SELECT * FROM SysUser");
+            Assert.That(r3.Rows.Count > 0);
+            var r41 = sqlHelper.GetList<SysRole>("SELECT * FROM SysUser");
+            var r4 = sqlHelper.GetList<SysRole>("SELECT * FROM SysRole");
+            var r5 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM SysRole");
 
-            var r6 = sqlHelper.GetList<SysRole>("SELECT * FROM Sys_Role where Id>@id",
+            var r6 = sqlHelper.GetList<SysRole>("SELECT * FROM SysRole where Id>@id",
                 parameters: new { id = 1 });
-            var r7 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM Sys_Role where Id=@id",
+            var r7 = sqlHelper.FirstOrDefault<SysRole>("SELECT * FROM SysRole where Id=@id",
                  parameters: new { id = 1 });
         }
     }
