@@ -109,6 +109,7 @@ namespace Simple.Utils.Helper
             return GetSection(section)?[key];
         }
 
+        [Obsolete]
         public static string GetConnectionString(string key)
         {
             return configuration[string.Concat("ConnectionStrings", ":", key)];

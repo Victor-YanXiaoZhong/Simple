@@ -18,7 +18,7 @@
 		<Title>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Title>
 		<Description>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Description>
 		<PackageOutputPath>..\..\Package</PackageOutputPath>
-		<VersionPrefix>1.0.2</VersionPrefix>
+		<VersionPrefix>1.0.3</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 	</PropertyGroup>
 	<ItemGroup>
