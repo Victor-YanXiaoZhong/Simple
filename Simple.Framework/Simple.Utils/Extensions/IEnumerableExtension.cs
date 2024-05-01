@@ -373,5 +373,66 @@ namespace Simple.Utils
         }
 
         #endregion List<Int32>
+
+        #region list 转tree
+
+        /// <summary>
+        /// 树节点
+        /// </summary>
+        /// <typeparam name="TNode">节点类型</typeparam>
+        public class TreeNode<TNode>
+        {
+            public TNode Item { get; set; }
+            public List<TreeNode<TNode>> Children { get; set; } = new List<TreeNode<TNode>>();
+        }
+
+        /// <summary>
+        /// 列表转树形结构
+        /// </summary>
+        /// <typeparam name="T">列表项类型</typeparam>
+        /// <param name="source">列表</param>
+        /// <param name="rootItemPredicate">根节点判定函数</param>
+        /// <param name="getChildrenFunc">获取子节点函数</param>
+        /// <returns>树形结构</returns>
+        public static List<TreeNode<T>> ToTree<T>(
+         this IList<T> source,
+         Func<T, bool> rootItemPredicate,
+         Func<T, IEnumerable<T>> getChildrenFunc)
+        {
+            // 找到根节点项
+            var rootItems = source.Where(rootItemPredicate).ToList();
+            if (!rootItems.Any())
+                return new List<TreeNode<T>>(); // 或者抛出一个异常
+
+            var queue = new Queue<TreeNode<T>>();
+            var rootNodes = new List<TreeNode<T>>();
+
+            // 初始化队列和根节点列表
+            foreach (var rootItem in rootItems)
+            {
+                var rootNode = new TreeNode<T> { Item = rootItem };
+                rootNodes.Add(rootNode);
+                queue.Enqueue(rootNode);
+            }
+
+            // BFS 构造树
+            while (queue.Count > 0)
+            {
+                var node = queue.Dequeue();
+                var children = getChildrenFunc(node.Item);
+                if (children != null)
+                {
+                    foreach (var child in children)
+                    {
+                        var childNode = new TreeNode<T> { Item = child };
+                        node.Children.Add(childNode);
+                        queue.Enqueue(childNode);
+                    }
+                }
+            }
+            return rootNodes;
+        }
+
+        #endregion list 转tree
     }
 }
