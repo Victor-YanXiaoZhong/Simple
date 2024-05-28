@@ -44,5 +44,8 @@ namespace Simple.Utils
             if (inNewLine) { Console.WriteLine(); }
             Write(msg, color);
         }
+
+        public static void Pause()
+        { Console.ReadKey(); }
     }
 }

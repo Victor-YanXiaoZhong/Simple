@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Microsoft.Startup\Microsoft.Extension.Startup.csproj" />
     <ProjectReference Include="..\..\Simple.Generator\Simple.Generator.csproj" />
     <ProjectReference Include="..\..\Simple.Socket\Simple.Socket.csproj" />
   </ItemGroup>

@@ -4,7 +4,10 @@ using Simple.Utils.Helper;
 
 ConfigHelper.Init(new string[] { "appsettings.json" }, false, true);
 
-LockHelperTest();
+throw new NotImplementedException();
+ConsoleHelper.Info("Hello, World!");
+ConsoleHelper.Pause();
+//LockHelperTest();
 
 static void LockHelperTest()
 {
