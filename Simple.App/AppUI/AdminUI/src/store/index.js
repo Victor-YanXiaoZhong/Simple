@@ -14,7 +14,7 @@ const getters = {
     if(state.user.info.Token == '') return state.user.info.Token
     return state.user.info.Token
   },
-  menus:state => state.app.menus,
+  menus:state => state.app.menus.menuTree,
   auths:state => state.app.auths
 }
 

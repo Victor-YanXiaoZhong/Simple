@@ -1,0 +1,19 @@
+[
+  {
+    "path": "AboutView"
+  },
+  {
+    "path": "home"
+  },
+  {
+    "path": "HomeView"
+  },
+  {
+    "path": "/test",
+    "children": [
+      {
+        "path": "text"
+      }
+    ]
+  }
+]
