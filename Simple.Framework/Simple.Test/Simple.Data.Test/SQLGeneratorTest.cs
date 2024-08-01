@@ -9,10 +9,10 @@ namespace Simple.Dapper.Test
 {
     public class SQLGeneratorTest
     {
-        ISQLGenerator sqlserverGenerator;
-        ISQLGenerator mysqlGenerator;
-        ISQLGenerator sqlLiteGenerator;
-        ClassMap classMap;
+        private ISQLGenerator sqlserverGenerator;
+        private ISQLGenerator mysqlGenerator;
+        private ISQLGenerator sqlLiteGenerator;
+        private ClassMap classMap;
 
         [SetUp]
         public void Setup()
@@ -46,6 +46,5 @@ namespace Simple.Dapper.Test
             var insert = sqlLiteGenerator.Insert(classMap);
             var update = sqlLiteGenerator.Update(classMap);
         }
-
     }
 }

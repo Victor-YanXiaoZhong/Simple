@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using System.Text;
 
 namespace Simple.Dapper
 {
@@ -45,8 +46,8 @@ namespace Simple.Dapper
         {
             var table = GetTableAttribute(type);
             var columns = GetDbColumns(type, table.Name, out DbColumnAttribute key);
-
-            var classMap = new ClassMap(type, table, columns)
+            var joinQuerys = GetJoinQuerys(type);
+            var classMap = new ClassMap(type, table, columns, joinQuerys)
             {
                 HasKey = key != null,
                 Key = key,
@@ -147,6 +148,23 @@ namespace Simple.Dapper
             return columns;
         }
 
+        /// <summary>获取模型的关联表</summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="FatalException"></exception>
+        internal static string GetJoinQuerys(Type type)
+        {
+            var joins = new StringBuilder();
+
+            var bindingAttr = BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase;
+
+            foreach (DbJoinQueryAttribute joinAttr in type.GetCustomAttributes(typeof(DbJoinQueryAttribute), true))
+            {
+                joins.AppendLine(joinAttr.Value);
+            }
+            return joins.ToString();
+        }
+
         public static ClassMap GetMap<T>()
         {
             return GetMap(typeof(T));
@@ -222,6 +240,7 @@ namespace Simple.Dapper
         public string TableAlias { get; set; }
         public DbColumnAttribute Key { get; set; }
         public bool HasKey { get; set; } = false;
+        public readonly string joinQuerys;
 
         #endregion 属性
 
@@ -233,7 +252,7 @@ namespace Simple.Dapper
 
         #endregion 私有属性
 
-        internal ClassMap(Type type, DbTableAttribute table, Dictionary<string, DbColumnAttribute> columns)
+        internal ClassMap(Type type, DbTableAttribute table, Dictionary<string, DbColumnAttribute> columns, string joinQuerys = "")
         {
             if (type.IsInterface)
             {
@@ -242,6 +261,7 @@ namespace Simple.Dapper
             classType = type;
             this.table = table;
             this.columns = columns;
+            this.joinQuerys = joinQuerys;
             TableName = table.Name;
             Schema = table.Schema;
             TableAlias = table.Alias;
@@ -317,13 +337,16 @@ namespace Simple.Dapper
                     var column = en.Current.Value;
                     if (!column.CanSelect) continue;
 
-                    if (column.Name.ToUpper() != column.PropertyName.ToUpper())
+                    var columnTableName = column.Table.IsNotEmpty() ? column.Table + "." : "";
+                    if (joinQuerys.IsNullOrEmpty()) columnTableName = "";
+
+                    if (column.Name.ToUpper() != column.PropertyName.ToUpper() || column.Table.IsNotEmpty())
                     {
-                        list.Add($" {sqlGenerator.ColumnDot}{column.Name}{sqlGenerator.ColumnDot} AS {column.PropertyName}");
+                        list.Add($" {columnTableName}{sqlGenerator.ColumnDot}{column.Name}{sqlGenerator.ColumnDot} AS {column.PropertyName}");
                     }
                     else
                     {
-                        list.Add($" {sqlGenerator.ColumnDot}{column.Name}{sqlGenerator.ColumnDot}");
+                        list.Add($" {columnTableName}{sqlGenerator.ColumnDot}{column.Name}{sqlGenerator.ColumnDot}");
                     }
                 }
             }

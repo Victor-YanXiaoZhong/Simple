@@ -105,7 +105,7 @@ namespace Simple.Dapper
             return selectCache.GetOrAdd(classMap.TableName, (sql) =>
             {
                 var columns = classMap.GetSelectColumns(this);
-                return $" SELECT {columns} FROM {classMap.TableName} ";
+                return $" SELECT {columns} FROM {classMap.TableName} {classMap.joinQuerys} ";
             });
         }
 

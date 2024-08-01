@@ -33,10 +33,11 @@ namespace Simple.Dapper
             Name = column.Name;
         }
 
-        public DbColumnAttribute(string name = "", string description = "", bool isIdentityKey = false,
+        public DbColumnAttribute(string name = "", string description = "", string table = "", bool isIdentityKey = false,
             bool canSelect = true, bool canInsert = true, bool canUpdate = true, bool canExport = true)
         {
             Name = name;
+            Table = table;
             Description = description;
             CanSelect = canSelect;
             CanInsert = canInsert;
@@ -51,6 +52,9 @@ namespace Simple.Dapper
 
         /// <summary>是否自增主键</summary>
         public bool IsIdentityKey { get; set; } = false;
+
+        /// <summary>表名（可选，包含该列的表的名称），如果不指定，则假定该列在主表中</summary>
+        public string Table { get; set; }
 
         public bool CanSelect { get; set; } = true;
         public bool CanInsert { get; set; } = true;
@@ -80,5 +84,20 @@ namespace Simple.Dapper
         {
             PropertyInfo.SetValue(instance, value, null);
         }
+    }
+
+    /// <summary>连接查询表信息</summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    public class DbJoinQueryAttribute : Attribute
+    {
+        /// <summary>构造函数</summary>
+        /// <param name="value">连接查询内容 eg Left Join Table B ON A.BId = B.Id</param>
+        public DbJoinQueryAttribute(string value)
+        {
+            Value = value;
+        }
+
+        /// <summary>连接查询内容</summary>
+        public string Value { get; private set; }
     }
 }
