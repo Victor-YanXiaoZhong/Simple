@@ -134,7 +134,7 @@ namespace Simple.AdminApplication.Application
                 var menus = db.SysMenu.Include(x => x.SysMenuFunctions).ToList();
                 var functions = db.SysFunction.ToList();
                 SetUserFunctions("UserPermission:" + loginUser.UserAccount, functions);
-                return ApiResult.Success(new { menus, functons = functions, menuTree = MenuTree.GetMenuTrees(menus, 0) });
+                return ApiResult.Success(new { menus, functions = functions, menuTree = MenuTree.GetMenuTrees(menus, 0) });
             }
             var roleId = loginUser.RoleId.ToInt();
             var menuData = db.SysRoleMenu.Where(p => p.SysRoleId == roleId)
@@ -146,7 +146,7 @@ namespace Simple.AdminApplication.Application
                 .Where(x => !x.SysFunction.Deleted)
                 .Select(x => x.SysFunction).ToList();
             SetUserFunctions("UserPermission:" + loginUser.UserAccount, functionData);
-            return ApiResult.Success(new { menus = menuData, functons = functionData, menuTree = MenuTree.GetMenuTrees(menuData, 0) });
+            return ApiResult.Success(new { menus = menuData, functions = functionData, menuTree = MenuTree.GetMenuTrees(menuData, 0) });
         }
 
         public List<SysFunction> UserPermissions(SysUser user)

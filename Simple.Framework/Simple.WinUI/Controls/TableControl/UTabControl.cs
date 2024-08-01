@@ -462,7 +462,7 @@ namespace Simple.WinUI.Controls.TableControl
 
                 #region 绘制关闭按钮
 
-                if (this.TabCloseShow && this.GetIsShowCloseButton(i))
+                if (i > 0 && this.TabCloseShow && this.GetIsShowCloseButton(i))
                 {
                     RectangleF close_rect = this.GetTabCloseRectangle(i);
                     g.DrawLine(close_pen, new PointF(close_rect.X, close_rect.Y), new PointF(close_rect.Right, close_rect.Bottom));

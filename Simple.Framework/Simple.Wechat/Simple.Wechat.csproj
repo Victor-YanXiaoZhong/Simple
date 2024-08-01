@@ -28,9 +28,9 @@
 		</None>
 	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Simple.Utils" Version="1.0.2" />
-    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.Api" Version="3.0.0" />
-    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.TenpayV3" Version="3.2.0" />
+    <PackageReference Include="Simple.Utils" Version="1.0.3" />
+    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.Api" Version="3.4.0" />
+    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.TenpayV3" Version="3.6.0" />
   </ItemGroup>
 
 </Project>

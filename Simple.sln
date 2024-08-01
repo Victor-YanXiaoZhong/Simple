@@ -79,7 +79,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple.Wechat", "Simple.Fra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple.JobManageConsole", "Simple.Framework\Simple.JobManageConsole\Simple.JobManageConsole.csproj", "{72CA8948-0E50-48C8-8CE4-6E4A911D6F7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.RedisClient", "Simple.Framework\Simple.Redis\Simple.RedisClient.csproj", "{0A9704D4-468A-4D5D-BFE3-5E62160131DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple.RedisClient", "Simple.Framework\Simple.Redis\Simple.RedisClient.csproj", "{0A9704D4-468A-4D5D-BFE3-5E62160131DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extension.Startup", "Simple.Framework\Microsoft.Startup\Microsoft.Extension.Startup.csproj", "{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.Test", "Simple.Framework\Simple.Test\Simple.Test\Simple.Test.csproj", "{D6283080-112F-4252-8539-72CA319AB8EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -199,6 +203,14 @@ Global
 		{0A9704D4-468A-4D5D-BFE3-5E62160131DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A9704D4-468A-4D5D-BFE3-5E62160131DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A9704D4-468A-4D5D-BFE3-5E62160131DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6283080-112F-4252-8539-72CA319AB8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6283080-112F-4252-8539-72CA319AB8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6283080-112F-4252-8539-72CA319AB8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6283080-112F-4252-8539-72CA319AB8EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -237,6 +249,8 @@ Global
 		{6BAF7A69-A3B3-4C57-AD3E-D9388840C29F} = {F356282F-15AD-49BC-AE07-BD3506878519}
 		{72CA8948-0E50-48C8-8CE4-6E4A911D6F7D} = {F356282F-15AD-49BC-AE07-BD3506878519}
 		{0A9704D4-468A-4D5D-BFE3-5E62160131DF} = {F356282F-15AD-49BC-AE07-BD3506878519}
+		{316C0712-BA5E-4AA0-B5F1-D2F09A4C3E4A} = {F356282F-15AD-49BC-AE07-BD3506878519}
+		{D6283080-112F-4252-8539-72CA319AB8EB} = {BC3A737C-EEAC-4B6F-8555-095D01D36FA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C134EDB8-F6AD-4D41-BB4B-2C92AF144C97}

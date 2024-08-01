@@ -9,7 +9,7 @@
     "ExpMinutes": "30"
   },
   "ConnectionStrings": {
-    "AdminDb": "Server=.\\SQLEXPRESS;Initial Catalog=Simpledb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+    "AdminDb": "Data Source=127.0.0.1;Initial Catalog=SimpleDb;Persist Security Info=True;User ID=sa;password=123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True;"
   },
   "Redis": {
     "Hosts": "127.0.0.1:6379",

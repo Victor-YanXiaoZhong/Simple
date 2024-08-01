@@ -30,8 +30,8 @@
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="RedLock.net" Version="2.3.2" />
-    <PackageReference Include="Simple.Utils" Version="1.0.2" />
-    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    <PackageReference Include="Simple.Utils" Version="1.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
   </ItemGroup>
 
 </Project>
