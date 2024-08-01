@@ -10,19 +10,16 @@ namespace Simple.Dapper
         {
             Name = table.Name;
             Schema = table.Schema;
-            Alias = "T0";
         }
 
-        public DbTableAttribute(string name, string schema = "", string alias = "T0")
+        public DbTableAttribute(string name, string schema = "")
         {
             Name = name;
             Schema = schema;
-            Alias = alias;
         }
 
         public string Name { get; set; }
         public string Schema { get; set; }
-        public string Alias { get; set; }
     }
 
     /// <summary>列标签</summary>

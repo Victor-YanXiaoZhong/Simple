@@ -237,7 +237,6 @@ namespace Simple.Dapper
 
         public string TableName { get; set; }
         public string Schema { get; set; }
-        public string TableAlias { get; set; }
         public DbColumnAttribute Key { get; set; }
         public bool HasKey { get; set; } = false;
         public readonly string joinQuerys;
@@ -264,7 +263,6 @@ namespace Simple.Dapper
             this.joinQuerys = joinQuerys;
             TableName = table.Name;
             Schema = table.Schema;
-            TableAlias = table.Alias;
         }
 
         /// <summary>遍历</summary>
