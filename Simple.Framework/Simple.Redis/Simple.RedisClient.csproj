@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <LangVersion>preview</LangVersion>
+	 <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	 <LangVersion>preview</LangVersion>
   </PropertyGroup>
 	<PropertyGroup>
 		<Authors>yxz(564353357@qq.com)</Authors>
@@ -15,7 +15,7 @@
 		<Title>Simple框架基础库，主要包含redis帮助类，用于方便开发的</Title>
 		<Description>Simple框架基础库，主要包含redis帮助类，用于方便开发的</Description>
 		<PackageOutputPath>..\..\Package</PackageOutputPath>
-		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionPrefix>1.0.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 	</PropertyGroup>
 	<ItemGroup>
