@@ -1,11 +1,34 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-	<Import Project="..\build\package.props" />
+	<PropertyGroup>
+		<Authors>yxz(564353357@qq.com)</Authors>
+		<Company>yxz</Company>
+		<Git>https://gitee.com/VCodeWork/simple-framework</Git>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://gitee.com/VCodeWork/simple-framework</RepositoryUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<Title>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Title>
+		<Description>Simple框架基础库，主要包含一些帮助类，用于方便开发的</Description>
+		<PackageOutputPath>..\..\Package</PackageOutputPath>
+		<VersionPrefix>1.0.2</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\Package\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
   <ItemGroup>
     <Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="wwwroot\**" />
